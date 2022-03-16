@@ -16,86 +16,26 @@ let bgMenuBtnClose = document.querySelector('.close');
 let bgMenu = document.querySelector('.menu');
 
 
-// рабочий вариант без закрытия
 
-// bgMenuBtn.addEventListener('click', function(){
-// 	bgMenu.classList.toggle('menu--open');
-//   let openTimeLine = gsap.timeline();
+//  Рабочий вариант анимации открытия и закрытия меню
 
-
-//   openTimeLine.from('.menu', {opacity: 0, duration: 2})
-//               .from('.menu__top', {opacity: 0, duration: 1, y: -140}, "-=1.5")
-//               .from('.menu__container', {opacity: 0, duration: 2, y: 80}, "-=2")
-//               .from('.nav__list', {opacity: 0, duration: 1, y: 50 }, "-=1")
-//               .from('.social', {opacity: 0, duration: 1, y: 50 }, "-=0.5")
-//               .from('.sub-menu', {opacity: 0, duration: 1, y: 50 }, "-=1")
-// })
-
-// bgMenuBtnClose.addEventListener('click', function(){
-//   bgMenu.classList.toggle('menu--open');
-// })
+const timeLine = gsap.timeline({paused: true});
 
 
-
-// вариант 2 отрабатывает открытие и закрытие 1 раз.
-
-// let openTimeLine2 = gsap.timeline();
-
-// bgMenuBtn.addEventListener('click', function(){
-//   bgMenu.classList.add('menu--open');
-
-//   openTimeLine2
-//     .from('.menu', {opacity: 0, duration: 2})
-//     .from('.menu__top', {opacity: 0, duration: 1, y: -140}, "-=1.5")
-//     .from('.menu__container', {opacity: 0, duration: 2, y: 80}, "-=2")
-//     .from('.nav__list', {opacity: 0, duration: 1, y: 50 }, "-=1")
-//     .from('.social', {opacity: 0, duration: 1, y: 50 }, "-=0.5")
-//     .from('.sub-menu', {opacity: 0, duration: 1, y: 50 }, "-=1")
-// });
-
-
-// bgMenuBtnClose.addEventListener('click', function(){
-//   setTimeout(() => bgMenu.classList.remove('menu--open'), 4000);
-//   openTimeLine2.reverse();
-
-// })
-
-
-// bgMenuBtnClose.onclick = function() {
-//   timeline.reverse()
-// }
-
-
-
-
-
-// Чужой рабочий вариант
-
-const timeLine = gsap.timeline();
-let firstAnim = true;
+timeLine
+  .fromTo('.menu', {opacity: 0, display: "none"}, {opacity: 1, display: "block", duration: 2})
+  .from('.menu__top', {opacity: 0, duration: 1, y: -140}, "-=1.5")
+  .from('.menu__container', {opacity: 0, duration: 2, y: 80}, "-=2")
+  .from('.nav__list', {opacity: 0, duration: 1, y: 50 }, "-=1")
+  .from('.social', {opacity: 0, duration: 1, y: 50 }, "-=0.5")
+  .from('.sub-menu', {opacity: 0, duration: 1, y: 50 }, "-=1");
 
 bgMenuBtn.addEventListener('click', function(){
-  bgMenu.classList.add('menu--open');
-
-  if (firstAnim) {
-    timeLine
-      .from('.menu', {opacity: 0, duration: 2})
-      .from('.menu__top', {opacity: 0, duration: 1, y: -140}, "-=1.5")
-      .from('.menu__container', {opacity: 0, duration: 2, y: 80}, "-=2")
-      .from('.nav__list', {opacity: 0, duration: 1, y: 50 }, "-=1")
-      .from('.social', {opacity: 0, duration: 1, y: 50 }, "-=0.5")
-      .from('.sub-menu', {opacity: 0, duration: 1, y: 50 }, "-=1")
-    ;
-
-    firstAnim = false;
-  } else {
-    timeLine.play();
-  }
+  timeLine.play();
 });
 
 
 bgMenuBtnClose.addEventListener('click', function(){
-  setTimeout(() => bgMenu.classList.remove('menu--open'), 3 * 1000);
   timeLine.reverse();
 })
 
